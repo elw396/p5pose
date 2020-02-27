@@ -4,7 +4,7 @@ let video;
 // p5js calls this code once when the page is loaded (and, during development,
 // when the code is modified.)
 export function setup() {
-  createCanvas(640, 480);
+  createCanvas(800, 600);
   video = select("video") || createCapture(VIDEO);
   video.size(width, height);
 
@@ -19,6 +19,7 @@ export function setup() {
 
   // Hide the video element, and just show the canvas
   video.hide();
+  
 }
 
 // p5js calls this function once per animation frame. In this program, it does
@@ -28,12 +29,16 @@ export function setup() {
 export function draw() {}
 
 function drawPoses(poses) {
+  console.log(poses);
+
   // Modify the graphics context to flip all remaining drawing horizontally.
   // This makes the image act like a mirror (reversing left and right); this is
   // easier to work with.
   translate(width, 0); // move the left side of the image to the right
   scale(-1.0, 1.0);
+  background("rgb(100,0,225)");
   image(video, 0, 0, video.width, video.height);
+  
   drawKeypoints(poses);
   drawSkeleton(poses);
 }
@@ -42,10 +47,10 @@ function drawPoses(poses) {
 function drawKeypoints(poses) {
   poses.forEach(pose =>
     pose.pose.keypoints.forEach(keypoint => {
-      if (keypoint.score > 0.2) {
-        fill(0, 255, 0);
+      if (keypoint.score > 0.1) {
+        fill(255, 0, 255);
         noStroke();
-        ellipse(keypoint.position.x, keypoint.position.y, 20, 10);
+        ellipse(keypoint.position.x, keypoint.position.y, 100, 100);
       }
     })
   );
@@ -57,7 +62,8 @@ function drawSkeleton(poses) {
     pose.skeleton.forEach(skeleton => {
       // skeleton is an array of two keypoints. Extract the keypoints.
       const [p1, p2] = skeleton;
-      stroke(255, 0, 0);
+      console.log("p1 score =", p1.score);
+      stroke(255, 0, 255);
       line(p1.position.x, p1.position.y, p2.position.x, p2.position.y);
     });
   });
