@@ -47,7 +47,7 @@ function drawPoses(poses) {
 function drawKeypoints(poses) {
   poses.forEach(pose =>
     pose.pose.keypoints.forEach(keypoint => {
-      if (keypoint.score > 0.1) {
+      if (keypoint.score > 0.2) {
         fill(255, 0, 255);
         noStroke();
         ellipse(keypoint.position.x, keypoint.position.y, 100, 100);
