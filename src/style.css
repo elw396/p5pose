@@ -1,5 +1,6 @@
 body {
-    margin: 0;
+    background-color: darkslategrey;
+    
 }
 
 /* This rule isn't used in the project as distributed, because the JavaScript
@@ -8,3 +9,23 @@ body video {
     position: absolute;
     opacity: 0.5;
 }
+#status {
+    font-size: 100px;
+    color: teal;
+}
+#watch {
+    color: yellowgreen;
+    font-size: 20px;
+   =
+}
+#game {
+    font-size: 50px;
+    color: seagreen;
+    
+
+} 
+#game:hover {
+    font-size: 50px;
+    color: violet;
+    transition: 1s;
+} 

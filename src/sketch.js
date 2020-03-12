@@ -1,6 +1,16 @@
 // setup initializes this to a p5.js Video instance.
 let video;
+var timerValue = 5;
+ var startButton;
+ var poses = [];
 
+
+ function preload() {
+   for(var i=0; i < 10; i++) {
+     poses[i] = loadImage("poses/pose"+i+".png");
+   }
+ 
+ }
 // p5js calls this code once when the page is loaded (and, during development,
 // when the code is modified.)
 export function setup() {
@@ -19,6 +29,9 @@ export function setup() {
 
   // Hide the video element, and just show the canvas
   video.hide();
+  createCanvas(800, 600);
+  textAlign(CENTER);
+  setInterval(timeIt, 1000);
   
 }
 
@@ -26,7 +39,24 @@ export function setup() {
 // nothing---instead, the call to `poseNet.on` in `setup` (above) specifies a
 // function that is applied to the list of poses whenever PoseNet processes a
 // video frame.
-export function draw() {}
+export function draw() {
+  background(220);
+Image(poses[i],random(poses));
+  if (timerValue >= 5) {
+    text("0:" + timerValue, width / 2, height / 2);
+  }
+  if (timerValue < 5) {
+    text('0:0' + timerValue, width / 2, height / 2);
+  }
+  if (timerValue == 0) {
+    text('Start!', width / 2, height / 2 + 15);
+  }
+  
+}
+function timeIt() {
+  if (timerValue > 0) {
+    timerValue--;
+  }}
 
 function drawPoses(poses) {
   console.log(poses);
@@ -36,8 +66,8 @@ function drawPoses(poses) {
   // easier to work with.
   translate(width, 0); // move the left side of the image to the right
   scale(-1.0, 1.0);
-  background("rgb(100,0,225)");
-  image(video, 0, 0, video.width, video.height);
+  background("rgb(0,0,0)");
+  //image(video, 0, 0, video.width, video.height);
   
   drawKeypoints(poses);
   drawSkeleton(poses);

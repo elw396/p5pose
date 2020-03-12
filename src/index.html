@@ -14,11 +14,18 @@
 
   <body>
     <div id="container"></div>
-    <p id="status">Loading model…</p>
+    <p id="status">Loading game!</p>
+    <p id="game">Memory Game!</p>
+    <p id="watch">Watch the poses, remember, and reenact!</p>
+
+    
   </body>
 
-  <script type="module">
-    import * as sketch from "./sketch.js";
-    Object.keys(sketch).forEach(name => (window[name] = sketch[name]));
-  </script>
+  
+    <script type="module"> 
+      import * as sketch from "./sketch.js";
+      Object.keys(sketch).forEach(name => (window[name] = sketch[name]));
+    </script>
+  
+  
 </html>
