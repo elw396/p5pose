@@ -1,20 +1,36 @@
 // setup initializes this to a p5.js Video instance.
 let video;
+var startB, easyB, moderateB, hardB;
 var timerValue = 5;
- var startButton;
- var poses = [];
+let poses = [];
 
+export function preload(){
+  for(let i = 1;i <= 10; i++) {
+    poses[i] = loadImage('poses/pose'+ i +'.png');
+    console.log(poses);
+  }
+}
 
- function preload() {
-   for(var i=0; i < 10; i++) {
-     poses[i] = loadImage("poses/pose"+i+".png");
-   }
- 
- }
 // p5js calls this code once when the page is loaded (and, during development,
 // when the code is modified.)
 export function setup() {
-  createCanvas(800, 600);
+  createCanvas(1000, 800);
+  
+  startB = createButton("START");
+  startB.position(width / 2 - 30, height + 40);
+  startB.mousePressed(timerCountdown);
+
+  easyB = createButton("READY");
+  easyB.position(width / 4, height + 10);
+  easyB.mousePressed(easyTimer);
+
+  moderateB = createButton("MODERATE");
+  moderateB.position(width / 2 - 43, height + 10);
+  moderateB.mousePressed(moderateTimer);
+
+  hardB = createButton("HARD");
+  hardB.position(width * (3 / 4) - 55, height + 10);
+  hardB.mousePressed(hardTimer);
   video = select("video") || createCapture(VIDEO);
   video.size(width, height);
 
@@ -29,9 +45,6 @@ export function setup() {
 
   // Hide the video element, and just show the canvas
   video.hide();
-  createCanvas(800, 600);
-  textAlign(CENTER);
-  setInterval(timeIt, 1000);
   
 }
 
@@ -40,23 +53,33 @@ export function setup() {
 // function that is applied to the list of poses whenever PoseNet processes a
 // video frame.
 export function draw() {
-  background(220);
-Image(poses[i],random(poses));
-  if (timerValue >= 5) {
-    text("0:" + timerValue, width / 2, height / 2);
-  }
-  if (timerValue < 5) {
-    text('0:0' + timerValue, width / 2, height / 2);
-  }
-  if (timerValue == 0) {
-    text('Start!', width / 2, height / 2 + 15);
-  }
   
 }
-function timeIt() {
-  if (timerValue > 0) {
-    timerValue--;
-  }}
+
+export function easyTimer() {
+  timerValue = 45;
+}
+
+export function moderateTimer() {
+  timerValue = 30;
+}
+
+export function hardTimer() {
+  timerValue = 15;
+}
+
+export function timerCountdown() {
+  setInterval(function() {
+    if (timerValue > 0) {
+      timerValue--;
+    }
+  }, 1000);
+}
+export function show() {
+  if (mousePressed('START')) {
+    image(poses[i], random(poses));
+  }
+}
 
 function drawPoses(poses) {
   console.log(poses);
@@ -66,11 +89,12 @@ function drawPoses(poses) {
   // easier to work with.
   translate(width, 0); // move the left side of the image to the right
   scale(-1.0, 1.0);
-  background("rgb(0,0,0)");
-  //image(video, 0, 0, video.width, video.height);
+  background("rgb(100,0,225)");
+  image(video, 0, 0, video.width, video.height);
   
   drawKeypoints(poses);
   drawSkeleton(poses);
+  // image(poses[1], 600, 200);
 }
 
 // Draw ellipses over the detected keypoints
