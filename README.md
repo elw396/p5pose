@@ -30,3 +30,11 @@ This will open PoseNet in a browser window.
 ## License
 
 MIT License
+
+
+Emily Wright
+PoseQuick
+
+Thank you to the Coding Train on YouTube and the p5js assistance pages as references for this project. 
+
+Begin the program, wait for the pose to appear, and do them as their appear. 

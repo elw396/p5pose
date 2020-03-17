@@ -16,7 +16,7 @@ body video {
 #watch {
     color: yellowgreen;
     font-size: 20px;
-   =
+   
 }
 #game {
     font-size: 50px;
@@ -29,3 +29,6 @@ body video {
     color: violet;
     transition: 1s;
 } 
+#quick {
+    color: palegreen;
+}
